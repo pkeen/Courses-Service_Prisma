@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String 
+  email String @unique
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  courses Course[]
+  lessons Lesson[]
+}
+
+model Course {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int // relation scalar field
+  title String
+  description String
+  isPublished Boolean
+  isCurated Boolean
+  price Decimal @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  courseSlots CourseSlot[]
+}
+
+model CourseSlot {
+  id Int @id @default(autoincrement())
+  course Course @relation(fields: [courseId], references: [id])
+  courseId Int
+  module Module @relation(fields: [moduleId], references: [id])
+  moduleId Int
+  lesson Lesson @relation(fields: [lessonId], references: [id])
+  lessonId Int
+  sequence_order Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// I might want to put a userId in module
+model Module {
+  id Int @id @default(autoincrement())
+  title String
+  text String
+  isPublished Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  courseSlots CourseSlot[]
+  moduleSlots ModuleSlot[]
+}
+
+// potentially add a moduleId to mean resursive module nesting
+model ModuleSlot {
+  id Int @id @default(autoincrement())
+  module Module @relation(fields: [moduleId], references: [id])
+  moduleId Int
+  lesson Lesson @relation(fields: [lessonId], references: [id])
+  lessonId Int
+  sequence_order Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lesson {
+  id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  title String
+  text String
+  videoUrl String
+  isPublished Boolean
+  isFree Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  moduleSlots ModuleSlot[]
+  courseSlots CourseSlot[]
+}
