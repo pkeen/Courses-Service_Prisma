@@ -12,8 +12,7 @@
         "start": "node dist/server.js",
         "dev:migrate": "dotenv -e .env.development -- npx prisma migrate dev",
         "dev:dbpush": "dotenv -e .env.development -- npx prisma db push",
-		"dev:seed": "dotenv -e .env.development -- ts-node src/db/prisma/seed.ts"
-
+        "dev:seed": "dotenv -e .env.development -- ts-node src/db/prisma/seed.ts"
     },
     "keywords": [],
     "author": "",
@@ -24,11 +23,11 @@
     },
     "devDependencies": {
         "@faker-js/faker": "^8.2.0",
-        "@prisma/client": "^5.4.2",
-        "@types/node": "^20.8.4",
-        "prisma": "^5.4.2",
+        "@prisma/client": "^5.8.0",
+        "@types/node": "^20.11.0",
+        "prisma": "^5.8.0",
         "ts-node-dev": "^2.0.0",
-        "typescript": "^5.2.2"
+        "typescript": "^5.3.3"
     },
     "dependencies": {
         "@types/express": "^4.17.19",
