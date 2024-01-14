@@ -4,6 +4,7 @@ import seedcourses from "./seeders/courses";
 import seedmodules from "./seeders/module";
 import seedlesson from "./seeders/lesson";
 import seedcourseslot from "./seeders/course-slot";
+import seedModuleSlot from "./seeders/module-slot";
 
 const main = async () => {
     // count users
@@ -40,6 +41,14 @@ const main = async () => {
     if (courseSlotCount < 150) {
         await seedcourseslot(p, 50);
     }
+
+    // Module Slot Seed
+    const moduleSlotCount = await p.moduleSlot.count();
+    console.log("Module Slot count:", moduleSlotCount);
+    if (moduleSlotCount < 150) {
+        await seedModuleSlot(p, 50);
+    }
+
 };
 
 main()

@@ -7,7 +7,7 @@
         "moduleDetection": "force",
         "strict": true
     },
-    "include": ["src/**/*.ts", "src/db/prisma/seed.ts", "src/db/prisma/utils/getAggregateId.js"],
+    "include": ["src/**/*.ts", "src/db/prisma/seed.ts", "src/db/prisma/utils/getAggregateId.js", "src/db/prisma/utils/getRandomId.js"],
     "exclude": ["node_modules"],
     "types": ["node", "@prisma/client"]
 }
